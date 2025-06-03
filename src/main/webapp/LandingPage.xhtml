@@ -1,0 +1,1646 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"     
+                xmlns:p="http://primefaces.org/ui"            
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:svm="http://java.sun.com/jsf/composite/svm"
+                xmlns:ui="http://java.sun.com/jsf/facelets"                    
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:lrp="http://solverminds.com/jsf/component"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+
+    <h:outputScript id="LandingPageCustomRenderJs" name="LandingPageCustomRenderJs.min.js?ver=18012024" library="resources.js"/> 
+     <h:outputScript id="customColurSettingJs" name="customColurSettingJs.min.js?ver=19062024" library="resources.js"/>
+<!--    <h:outputScript id="LandingCellRendererfortable2" name="LandingCellRendererfortable2.js" library="resources.js"/>    
+    <h:outputScript id="RevokeCellRenderer" name="RevokeCellRenderer.js" library="resources.js"/>
+    <h:outputScript id="getcellcolor" name="getcellcolor.js" library="resources.js"/>
+    <h:outputScript id="getBackgroundcolor" name="getBackgroundcolor.js" library="resources.js"/>
+    <h:outputScript id="StatusCellRenderer" name="StatusCellRenderer.js" library="resources.js"/>
+    <h:outputScript id="GroupNewBtnRenderer" name="GroupNewBtnRenderer.js" library="resources.js"/>
+    <h:outputScript id="GroupEditBtnRenderer" name="GroupEditBtnRenderer.js" library="resources.js"/>
+    <h:outputScript id="GroupviewBtnRenderer" name="GroupviewBtnRenderer.js" library="resources.js"/>
+    <h:outputScript id="LandingCellRenderer" name="LandingCellRenderer.js?ver=181223" library="resources.js"/>
+    <h:outputScript id="dateRangePickerMoment" name="dateRangePickerMomen.js" library="js"/>
+    <h:outputScript id="daterangepicker" name="daterangepicker.js?ver=14042023" library="minifiedJs"/>
+    <h:outputScript id="Nonbpmrevokerender" name="NBpmRevokeRecallRenderer.js?ver=08062023" library="resources.js"/>
+    <h:outputScript id="NBpmDataSetRenderer" name="NBpmDataSetRenderer.js?ver=08062023" library="resources.js"/>-->
+
+    <style>
+        .fa-landPg-eye{
+            background-image: url("#{resource['mackimages/menu_icons/landpg_eye.svg']}") !important;
+            width: 18px !important;
+            height: 18px !important;
+            margin-left: -10px !important;
+            margin-top: -9px !important;
+        }
+        .fa-landPg-edit {
+            background-image: url(/javax.faces.resource/mackimages/menu_icons/landpg_edit.svg.xhtml) !important;
+            width: 22px !important;
+            height: 21px !important;
+            margin-left: -11px !important;
+            margin-top: -10px !important;
+        }
+        .fa-landPg-gear{
+            background-image: url(/javax.faces.resource/mackimages/menu_icons/landpg_edit.svg.xhtml) !important;
+            width: 22px !important;
+            height: 21px !important;
+            margin-left: -11px !important;
+            margin-top: -10px !important;
+        }
+        
+
+        .btn-success.revokereqbtn{
+            color: #fff;
+            background-color: #FF8C00;
+            border-color: #FF8C00;
+        }
+        .fa-landPg-edit {
+            background-image: url(/javax.faces.resource/mackimages/menu_icons/landpg_edit.svg.xhtml) !important;
+            width: 22px !important;
+            height: 21px !important;
+            margin-left: -11px !important;
+            margin-top: -10px !important;
+        }
+        #columnToggler	{
+            float: right;
+        }
+        /*.ui-datatable thead input.ui-column-filter {
+            display: none;
+        }*/
+
+        #vsldlg .ui-dialog-content{
+            text-align:center !important;
+        }
+        /*        .form_table_wrapper.landing_page_body {
+                    position: absolute;
+                }*/
+        .ui-datatable table{
+            table-layout: initial !important;
+        }
+        .form_table_wrapper.landing_page_body .ui-datatable .ui-paginator {
+            text-align: left;
+            margin-left: -15px;
+        }
+        .right_mask_layer {
+            width: 20px;
+            height: 100%;
+            background: #dde2e5;
+            border-left: 5px solid #c7c7c7;
+            position: fixed;
+            right: 0;
+            z-index: 1;
+        }
+
+        .left_mask_layer {
+            width: 20px;
+            height: 100%;
+            background: #dbe0e3;
+            border-right: 5px solid #c7c7c7;
+            position: fixed;
+            left: 200px;
+            z-index: 1;
+            transition: 0.3s;
+        }
+
+        .layout-menu-static-inactive .left_mask_layer {
+            width: 20px;
+            height: 100%;
+            background: #dbe0e3;
+            border-right: 5px solid #c7c7c7;
+            position: fixed;
+            left: 50px;
+            z-index: 1;
+            transition: 0.3s;
+        }
+
+        .form_table_wrapper.landing_page_body {
+            min-width: 100%
+        }
+
+        .form_table_wrapper.landing_page_body .ui-datatable-tablewrapper {
+            overflow: visible !important;
+            margin-top: 35px;
+            margin-right: 15px;
+        }
+
+        .ui-datatable .ui-sortable-column .ui-icon-triangle-1-s:before {
+            content: "\f161";
+            font-family: FontAwesome;
+            font-size: 14px;
+            top: -5px;
+            position: relative;
+            right: 0;
+            color: #ccc;
+        }
+
+        .ui-datatable .ui-sortable-column .ui-icon-triangle-1-n:before {
+            content: "\f160";
+            font-family: FontAwesome;
+            font-size: 14px;
+            top: -5px;
+            position: relative;
+            right: 0;
+            color: #ccc;
+        }
+        th.statusclassship{
+            background-color: #02bd9a !important;
+        }
+        th.statusclassshore{
+            background-color: chocolate !important;
+        }
+        th.statusclassothers{
+            background-color: blueviolet !important;
+        }
+        .reorder_dialog {
+            position: absolute;
+            right: 170px;
+            top: 35px !important;
+            left: auto !important;
+        }
+        .reorder_dialog .ui-dialog-content {
+            padding: 0 !important;
+            background: #fff !important;
+        }
+        .reorder_dialog .ui-dialog-titlebar {
+            background: #fff !important;
+            height: 0px !important;
+        }
+        .reorder_dialog .ui-orderlist .ui-orderlist-item {
+            background: #fff;
+            font-weight: bold;
+        }
+
+        .reorder_dialog .ui-dialog-footer {
+            background: #fff !important;
+            border-top: 2px solid #ccc !important;
+        }
+
+        .reorder_dialog .ui-dialog-footer .ui-button {
+            background-color: #5bc0de !important;
+            border-color: #46b8da;
+            color: #fff !important;
+        }
+
+        .reorder_dialog .ui-dialog-footer .ui-button:hover {
+            background-color: #31b0d5 !important;
+            border-color: #269abc;
+        }
+
+        .landing_page_header .ui-splitbutton .ui-button.ui-splitbutton-menubutton    {
+            padding: 15px;
+        }
+        .landing_page_header  .ui-menu .ui-menu-list li.ui-menuitem .ui-menuitem-link .ui-menuitem-text{
+            font-weight: bold !important;
+        }
+        .ui-menu.ui-menu-dynamic {
+            background: #fff !important;
+        }
+        .fa-excel{
+            background-image: url("/javax.faces.resource/mackimages/excel.svg.xhtml") !important;
+            background-size: 100%;
+        }
+
+        .fa-pdf{
+            background-image: url("/javax.faces.resource/mackimages/pdf orgred.svg.xhtml") !important;
+            background-size: 100%;
+        }
+
+        .fa-csv{
+            background-image: url("/javax.faces.resource/mackimages/csv-file-format-extension.svg.xhtml") !important;
+            background-size: 100%;
+        }
+        .fa-reload{
+            background-image: url("/javax.faces.resource/mackimages/reload.svg.xhtml") !important;
+            background-size: 100%;
+        }
+        .fa-revoked.ui-icon.fa {
+            background-image: url(/javax.faces.resource/mackimages/revoke.svg.xhtml) !important;
+            background-repeat: no-repeat;
+            width: 15px;
+            height: 15px;
+        }
+        .ui-columntoggler.ui-widget-content {
+            max-height: 220px !important;
+            height: auto !important;
+        }
+        .ui-orderlist .ui-orderlist-list {
+            height: auto !important;
+
+            max-height: 200px !important;
+        }
+        .rightalignment {
+            float: right;
+        }
+        .leftalignment {
+            text-align: left;
+        }
+
+        body.layout-compact .ui-calendar.calendar_focus .ui-datepicker-trigger{
+            top: 1px !important;
+        }
+
+
+        <!-- .dlp-bg6 {
+            -->
+            <!-- background-image: linear-gradient(to left, #ff978b, #ff6e88);
+            -->
+            <!--
+        }
+        -->
+        <!-- .dlp-bg7 {
+            -->
+            <!-- background-image: linear-gradient(to right, #08afe9, #24e7a8);
+            -->
+            <!--
+        }
+        -->
+        <!-- .dlp-bg8 {
+            -->
+            <!-- background-image: linear-gradient(to right, #897dfb, #e181f0);
+            -->
+            <!--
+        }
+        -->
+        .dlp-card-center {
+            width:90%;
+            margin:2px 10px;
+            color: #fff;
+            background-color: #fff;
+            box-shadow: 1px 2px 6px #ccc;
+            display: -webkit-flex;
+            -webkit-align-items: center;
+            display: flex;
+            align-items: center;
+        }
+        .dlp-half-width {
+            width: 60%;
+        }
+        .dlp-card-center .dlp-half-width {
+            padding: 5px;
+            margin-left: 10px;
+
+        }
+        .dlp-count {
+            font-size: 22px !important;
+            margin: 0px auto;
+            color: #fffbfb;
+            font-weight: 500;
+            text-align: left;
+        }
+        .dlp-title {
+            font-size: 12px;
+            font-weight: 500;
+            margin: 5px 0px 0px 0px;
+            height: 16px;
+            color: #fffbfb;
+            text-align: left;
+        }
+        .dlp-icon {
+            <!-- display: flex;
+            -->
+            <!-- align-items: center;
+            -->
+            <!-- justify-content: center;
+            -->
+            <!-- height: 52px;
+            -->
+            <!-- background-repeat: no-repeat;
+            -->
+            <!-- background-size: 32px 32px;
+            -->
+            <!-- background-position: top right;
+            -->
+            <!-- padding: 1px !important;
+            -->
+        }
+        .dlp-half-width-icon {
+            <!-- width: 23%;
+            -->
+        }
+        .filtrImg{
+            height: 34px;
+            margin-right: 5px;
+        }
+        .filterSymblPrnt[status="true"] .dlp-status-filter-indicator {
+            visibility: visible !important;
+        }
+        .dlp-status-filter-indicator {
+            visibility: hidden !important;
+            position: relative;
+            top: 39px;
+            left: -17px;
+            font-size: 14px;
+            color: #827979;
+        }
+        /*        //  span .ui-button.submitBtn:hover{
+                //      background-color: #00BCD4 !important;
+                //  }
+                // span .ui-button.editBtn:hover{
+                //     background-color: #4CAF50 !important;
+                //  }*/
+        .submitBtn:hover span{
+            color: #FFF !important;
+        }
+        .editBtn:hover span{
+            color: #FFF !important;
+        }
+
+        .ag-cell {
+            font-size: 14px !important;
+        }
+        .status-center-align{
+            text-align: center;
+            border: none;
+        }
+        div.ag-bl .label-Approved, .card .label-Approved {
+            color: rgb(255, 255, 255);
+            border-radius: 2px;
+            font-weight: 400;
+            white-space: nowrap;
+            background: rgb(0, 166, 90);
+            padding: 2px 6px;
+        }
+
+        .ag-header-cell {
+            font-size: 14px !IMPORTANT;
+        }
+        .inputRangePadd .ui-panel-content{
+            padding: 0px 14px !important;
+            background-color: #fff !important;
+        }
+
+
+        .dlp-card-center-right-crnr {
+            height: 38px;
+            color: #fff;
+            background-color: #eee;
+            border-radius: 4px;
+            padding: 10px;
+            /* margin-right: 13px; */
+            display: -webkit-flex;
+            -webkit-align-items: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .dlp-card-center-right-crnr .dlp-half-width {
+            padding: 5px;
+            margin-left: 10px;
+        }
+
+        .dlp-amount.dlp-right-crnr, .dlp-text.dlp-right-crnr{
+            display:inline-block;
+        }
+        .dlp-count-crnr{
+            font-size: 15px !important;
+            margin: 0px auto;
+            color: #ffffff;
+            font-weight: 500;
+            text-align: left;
+        }
+        .dlp-title-crnr{
+            font-size: 12px;
+            font-weight: 500;
+            margin: 4px 0px 0px 0px;
+            height: 16px;
+            color: #fffbfb;
+            text-align: left;
+        }
+        .dlp-icon-crnr{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            background-repeat: no-repeat;
+            /* background-size: 32px 32px; */
+            background-position: top right;
+            padding: 1px !important;
+        }
+        .filtrImgCrnr{
+            height: 26px;
+            margin-right: 5px;
+        }
+        .dlp-status-filter-indicator-crnr{
+            visibility: hidden !important;
+            <!-- margin-top: -10px;
+            -->
+            <!-- margin-right: -48px;
+            -->
+            <!-- position: relative;
+            -->
+            <!-- width: 26px;
+            -->
+            <!-- left: -18px;
+            -->
+            <!-- height: 38px;
+            -->
+            <!-- padding-left: 13px;
+            -->
+            <!-- font-size: 14px;
+            -->
+            <!-- color: #fffbfb;
+            -->
+        }
+        .filterSymblPrnt[status="true"] .dlp-status-filter-indicator-crnr {
+            visibility: visible !important;
+        }
+
+        .arrw_Pnt {
+            font-size: 17px;
+            top: -2px;
+            color: #1e2196;
+            position: relative;
+            left: 11px;
+        }
+        .dyn_menu_tab {
+            width: 40px;
+            height: 19px;
+            z-index: 999;
+            margin-top: -15px !important;
+            /* right: -15px; */
+            /* top: 119px; */
+            cursor: pointer;
+            margin: auto;
+            transition: all .6s ease-in-out;
+            border-bottom: none !important;
+            background: #fff;
+            border: 1px solid #366ea0;
+            border-bottom-right-radius: 25px;
+            border-bottom-left-radius: 25px;
+        }
+        .dyn_menu_tab div {
+            width: 20px;
+            height: 2px;
+            background-color: #fff;
+            display: block;
+            margin: 4px 14px;
+            transition: all .6s ease-in-out;
+        }
+        .dyn_menu_tab div:nth-child(1) {
+            margin-top: 13px;
+        }
+
+        /*end of dyn_menu_tab*/
+        .dyn_menu_tab.active {
+            right: 206px;
+            transition: all .6s ease-in-out;
+
+        }
+        .dyn_menu_tab.active #one {
+            -webkit-transform: translateY(6px) rotate(-135deg);
+            transform: translateY(6px) rotate(-135deg);
+            transition: all .6s ease-in-out;
+            background-color: #fff;
+        }
+        .dyn_menu_tab.active #two {
+            opacity: 0;
+            transition: .4s ease;
+        }
+        .dyn_menu_tab.active #three {
+            -webkit-transform: translateY(-7px) rotate(-45deg);
+            transform: translateY(-7px) rotate(-45deg);
+            transition: all .6s ease-in-out;
+            background-color: #fff;
+        }
+
+        .dyn_menu_hide {
+            height: 63px !important;
+            margin-top: 6px;
+            margin-bottom: 6px;
+            z-index: 1000;
+            transition: all .6s ease-in-out;
+            border: 1px solid #e4e4e4;
+            background-color: #ffffff;
+            border-left: 4px solid #337ab7;
+            overflow-x: auto;
+            box-shadow: 1px 2px 3px#ccc;
+            transition: all .6s ease-in-out;
+        }
+        .dyn_menu_hide::-webkit-scrollbar {
+            width: 6px;
+            background-color: #d6d0d0;
+        }
+        .dyn_menu_hide::-webkit-scrollbar-thumb {
+            background-color: #337ab7;
+        }
+        /*end of dyn_menu_hide*/
+
+
+        .dyn_menu_list_sub_item    {
+            background: #333 !important;
+        }
+
+        .dyn_menu_list_btn    {
+            position: absolute;
+            right: 0;
+            height: 40px;
+            width: 20px;
+            padding: 12px 4px;
+            color: #fff;
+        }
+        .singlegrid .dynamiclandingpageagclass_hder.dynamiclandingpageagclassexpnd {
+            height: calc(100vh - 263px) !important;
+        }
+        .grid_test_top_margin{
+            <!-- margin-top:13px;
+            -->
+        }
+        .daterangepicker .ranges li {
+            font-family: 'Lato', sans-serif !important;
+        }
+
+        .ag-header-cell .ag-icon.ag-icon-filter {
+            position: relative;
+            top: -8px;
+        }
+        /*  .lndgridcustomheight .ag-row{
+  
+              height: 35px !important;
+          }
+          .ag-theme-blue .ag-cell{
+              line-height: 36px !important;            
+          }
+          .lndgridcustomheight .ag-header-cell{            
+              height: 35px !important;
+          }*/
+        .cirlc_Alink{
+            padding: 0px;
+            border-bottom-right-radius: 90px;
+            border-top-right-radius: 90px;
+            border-bottom-left-radius: 90px;
+            border-top-left-radius: 90px;
+            height: 46px;
+            /* margin: 0px; */
+            border: 1px solid #e87f7f;
+            margin-bottom: 8px;
+        }
+        .circle_count_val{
+            padding: 4px 4px;
+            background: #fff;
+            border-radius: 50%;
+            border: 2px solid #ff978b;
+            height: 55px;
+            width: 55px;
+            margin-left: -1PX;
+        }
+        .circle_count_number{
+            background: #ff978b;
+            border-radius: 50%; /* padding: 12px; */
+            vertical-align: middle;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            margin: 0px;
+            padding: 15px 0px;
+        }
+        .circle_count_text{
+            font-weight: 800; /* white-space: nowrap; */
+            color: #000;
+            text-align: center;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            padding: 7px 2PX;
+            margin: 12PX 0PX;
+        }
+
+        .circle_count_text.My.Notification{
+            margin-left: -8px;
+            padding: 0px 6px;
+        }
+
+        /*vino .ag-theme-blue .ag-header {
+             background-color: #A1B9C3 !important;
+         }
+ 
+         .ag-theme-blue .ag-input-wrapper input:not([type]), .ag-theme-blue .ag-input-wrapper input[type="text"], .ag-theme-blue .ag-input-wrapper input[type="number"], .ag-theme-blue .ag-input-wrapper input[type="tel"], .ag-theme-blue .ag-input-wrapper input[type="date"], .ag-theme-blue .ag-input-wrapper input[type="datetime-local"] {
+             border-width: 1px;
+             border-style: solid;
+             border-color: #8FAAB5;
+         }
+         .ag-header-cell-label .ag-header-cell-text {
+             color: #fff;
+             font-weight: 400;
+             /* font-size: 13px; */
+        /*vino       font-family: 'Lato', sans-serif !important;
+               font-size: 14px !important;
+           }
+   
+           .ag-theme-blue .ag-icon {
+               color: #FFF !important;
+           }
+   
+           .ag-theme-blue .ag-row-odd {
+               background-color: #CEDBE0;
+           }
+   
+           .nfr_toolpanel_li_icon {
+               float: right;
+               background: #A1B9C3;
+           }
+   
+           .nfr_toolpanel_li_icon img {
+               margin: 0px 0px 1px 0px;
+               /* margin: 1px 0px 1px 0px; */
+        /*vino        max-width: 70%;
+    
+            }
+    
+            .ag-theme-blue .ag-header-cell {
+                border-right: 1px solid #ccc;
+            }
+    
+            .ag-theme-blue .ag-column-drop-cell{
+                border-radius:15px;
+            }
+    
+            .ag-icon.ag-icon-grip{
+                color: #000 !important;
+            }
+    
+            .ag-icon.ag-icon-cancel{
+                color: #000 !important;
+            }
+    
+            .ag-theme-blue .ag-header-cell, .ag-theme-blue .ag-header-group-cell {    
+                border-color: #ccc; 
+            }
+            .ag-theme-blue .ag-side-bar .ag-side-buttons .ag-side-button button {
+                background: #A1B9C3;
+                color: #fff;
+            }
+    
+            .sm-dt-table-headerpnl {
+                height: 20px;
+                width: 100%;
+                border: 1px solid #CCC;
+                border-style: solid solid none solid;
+            }
+    
+            .ag-theme-blue .ag-column-drop-horizontal.ag-column-drop {
+                border: 1px solid #CCC;
+                border-bottom: 0;
+            }
+    
+            .ag-theme-blue .ag-row {
+                border-style: solid;
+                border-color: #CCC;
+                border-width: 0;
+            }
+    
+    
+            .ag-theme-blue .ag-ltr .ag-row.ag-cell-last-left-pinned, .ag-theme-blue .ag-ltr .ag-cell:not(.ag-cell-focus).ag-cell-last-left-pinned {
+                border-right: 1px solid #CCC;
+            }
+    
+            .ag-theme-blue .ag-root {
+                border: 1px solid #CCC;
+            }	
+            .ag-theme-blue .ag-icon.ag-icon-checkbox-unchecked{
+                color:#000 !important;
+            }
+            .ag-theme-blue .ag-icon.ag-icon-checkbox-checked{
+                color:#000 !important;
+            }
+            .ag-theme-blue .ag-icon.ag-icon-checkbox-indeterminate{
+                color:#000 !important;
+            } vino */
+
+        .singlegrid .dynamiclandingpageagclass_hder	{
+            height: calc(100vh - 190px) !important;
+        }
+
+        .landing_pg_cntntArea{
+            position: absolute;
+            right: 15px;
+            left: 215px;
+            transition:.3s all;
+        }
+
+
+
+        .layout-menu-static-inactive .landing_pg_cntntArea{
+            left: 65px;
+            transition:.3s;
+
+        }
+
+
+        .window-module-mainpnl .landing_pg_cntntArea{
+            position: fixed;
+            right: 0px;
+            left: 0px;
+            transition:.3s all;
+        }
+
+
+
+        .window-module-mainpnl .singlegrid .dynamiclandingpageagclass_hder {
+            height: calc(100vh - 122px) !important;
+        }
+
+
+
+        .window-module-mainpnl .singlegrid .dynamiclandingpageagclass_hder.dynamiclandingpageagclassexpnd {
+            height: calc(100vh - 194px) !important;
+        }
+
+        #LND_dataTableNewPanel2_content{
+            padding :0;
+        }
+        #nonbpmrevokewidgetvar {
+            width: 80% !important;
+        }
+        .parent-with-child.has-child-circle-count {
+                padding: 5px 0px !important;
+            }
+         .ag-row-even .LNDcolurLabel {
+                    background-color: #0277BB !important;
+                    text-align: center;
+                    padding: 5px 10px !important;
+                    line-height: 25px !important;
+                    font-size: 13px !important;
+                    color: #fff;
+                    border-left: 2px solid #0277BB !important;
+                    border-radius: 9px !important;
+                    margin-left: 2px !important;
+            }
+            .ag-row-odd .LNDcolurLabel {
+                    background-color: #0277BB !important;
+                    text-align: center;
+                    padding: 5px 10px !important;
+                    line-height: 25px !important;
+                    font-size: 13px !important;
+                    color: #fff;
+                    border-left: 2px solid #0277BB !important;
+                    border-radius: 9px !important;
+                    margin-left: 2px !important;
+            }
+            .tiles-body>.form_wrapper .grid_test_top {
+   margin-top: -24px;
+}
+#landingPageForm .tab_head{
+   height: 30px;
+}
+            
+    </style>
+    <script>
+        $(document).ready(function () {
+            $(".dyn_menu_tab").click(function () {
+                console.log("testing");
+                if ($(".show_toolbarGrid i").hasClass("fa-chevron-down")) {
+                    $(".show_toolbarGrid i").removeClass("fa-chevron-down");
+                    $(".show_toolbarGrid i").addClass("fa-chevron-up");
+                    $(".grid_test_top").addClass("grid_test_top_margin");
+                    $(".dynamiclandingpageagclass_hder").addClass("dynamiclandingpageagclassexpnd");
+                } else {
+                    $(".show_toolbarGrid i.arrw_Pnt").addClass("fa-chevron-down");
+                    $(".show_toolbarGrid i.arrw_Pnt").removeClass("fa-chevron-up");
+                    $(".dynamiclandingpageagclass_hder").removeClass("dynamiclandingpageagclassexpnd");
+                    $(".grid_test_top").removeClass("grid_test_top_margin");
+                }
+            });
+        });
+        $(document).ready(function () {
+		// Find all elements with the specified child classes
+var childElements = document.querySelectorAll('.circle_count_val.Stage.Closed, .circle_count_val.Escalated.Approval');
+
+// Loop through each child element found
+childElements.forEach(function(childElement) {
+    // Get the parent element of the child
+    var parentElement = childElement.parentNode;
+
+    // Add a class to the parent element
+    parentElement.classList.add('has-child-circle-count');
+});
+});
+    </script>		
+    <script>
+        //function expAggrid_height() {
+        //	alert("testing");
+        //	if ($(".show_toolbarGrid i").hasClass("fa-chevron-down")) {
+        //		$(".show_toolbarGrid i").removeClass("fa-chevron-down");
+        //		$(".show_toolbarGrid i").addClass("fa-chevron-up");
+        //		$(".grid_test_top").addClass("grid_test_top_margin");
+        //		$(".dynamiclandingpageagclass_hder").addClass("dynamiclandingpageagclassexpnd");
+        //	} else {
+        //		$(".show_toolbarGrid i.arrw_Pnt").addClass("fa-chevron-down");
+        //		$(".show_toolbarGrid i.arrw_Pnt").removeClass("fa-chevron-up");
+        //		$(".dynamiclandingpageagclass_hder").removeClass("dynamiclandingpageagclassexpnd");
+        //		$(".grid_test_top").removeClass("grid_test_top_margin");
+        //	}
+        //}
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("button.filter").click(function (e) {
+                var displ = $(".ui-datatable .ui-column-filter").css('display');
+                console.log("sdvwfvwef" + displ);
+                if ($(".ui-datatable .ui-column-filter").css('display') == 'block') {
+                    console.log("inside")
+                    $(".ui-datatable .ui-column-filter").css('display', 'none');
+                } else {
+                    $(".ui-datatable .ui-column-filter").css('display', 'block');
+                }
+                //$(".ui-datatable thead input.ui-column-filter").fadeToggle();
+                $(".ui-datatable thead input.ui-column-filter").css('display', 'block');
+
+            });
+
+            // 	$(".sort .ui-sortable-column-icon.ui-icon.ui-icon-carat-2-n-s").addClass("ui-icon-triangle-1-n");
+        });
+
+        function defaultSortingSymbol() {
+            $(".sort").parent().parent().addClass('sort');
+            $(".sort .ui-sortable-column-icon.ui-icon.ui-icon-carat-2-n-s").addClass("ui-icon-triangle-1-s");
+        }
+        function removeDefaultSortingSymbol() {
+            $(".sort .ui-sortable-column-icon.ui-icon.ui-icon-carat-2-n-s").removeClass("ui-icon-triangle-1-s");
+        }
+        function addAlignmentRight() {
+            //$(".rightalignment").parent().css("text-align","right");
+            jQuery(this).parent().addClass('rightalignment');
+        }
+        function addAlignmentLeft() {
+            //$(".leftalignment").parent().css("text-align","left");
+            jQuery(this).parent().addClass('leftalignment');
+        }
+
+        $(window).ready(function () {
+            $('form').attr('rel', 'opener');
+        });
+
+
+        function getRowData(data) {
+            try {
+                if (data !== null) {
+                    var dataMap = JSON.parse(data);
+                    var finalFilterObjdataarray = dataMap.map;
+                    if (finalFilterObjdataarray !== null) {
+                        lnd_navigate_rc_getRowData([{
+                                name: 'rowFilterValue',
+                                value: JSON.stringify(finalFilterObjdataarray)
+                            }]);
+                    }
+                }
+
+            } catch (e) {
+                console.log('---lnd---Exception ' + e)
+            }
+        }
+        
+        function showLNDGlassPane(){
+            try {
+                console.log('showGlassPane === >>');
+                PF('landingPageForm_progress').block(); 
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        function hideLNDGlassPane(){
+            try {
+                console.log('hideLNDGlassPane === >>');
+                PF('landingPageForm_progress').unblock(); 
+            } catch (e) {
+                console.log(e);
+            }
+        }
+       
+    </script>
+
+    <h:form id="landingPageForm" prependId="false">
+        <svm:glassPane widgetVar="landingPageForm_progress" value="load" for="-landingPageForm"/>
+        <div class="sticky_header tiles_sticky_header">
+            <div class="tab_head_sticky">
+                <section class="content-header">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="tab_btn" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Brooklyn Bridge | Panama | Container Ship | Master"><i class="fa fa-chevron-down"></i></div>
+                            <div class="tab_head">
+                                <div class="pull-left">#{languageResourceBundle[LandingPageCBean.model.dataModel.mdlId]}</div>
+                                <!--<div class="pull-left"># {LandingPageCBean.model.dataModel.sm_title}</div>-->
+                            </div>
+                            <div id="tab_content" style="padding-top: 0px;" class="collapse in">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <p:remoteCommand name="lnd_navigate_rc_windowOpenedState" id="lnd_navigate_rc_windowOpenedState" 
+                         actionListener="#{LandingPageCBean.ctrl.windowOpenedState}"/>
+        <p:remoteCommand name="lnd_navigate_rc_viewClicked" id="lnd_navigate_rc_viewClicked" 
+                         actionListener="#{LandingPageCBean.ctrl.viewClicked()}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();" />
+
+        <p:remoteCommand name="lnd_navigate_rc_editClicked" id="lnd_navigate_rc_editClicked" 
+                         actionListener="#{LandingPageCBean.ctrl.editClicked()}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();"/>
+        
+        <p:remoteCommand name="lnd_navigate_rc_supereditClicked" id="lnd_navigate_rc_supereditClicked" 
+                         actionListener="#{LandingPageCBean.ctrl.superEditorDialog()}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();"/>
+
+        <p:remoteCommand name="lnd_navigate_rc_navigateNewClicked" id="lnd_navigate_rc_navigateNewClicked" 
+                         actionListener="#{LandingPageCBean.ctrl.navigateNewColumnClicked()}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();" />
+        <p:remoteCommand name="lnd_navigate_rc_navigateEditClicked" id="lnd_navigate_rc_navigateEditClicked" 
+                         actionListener="#{LandingPageCBean.ctrl.navigateEditColumnClicked()}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();" />
+        <p:remoteCommand name="lnd_navigate_rc_navigateViewClicked" id="lnd_navigate_rc_navigateViewClicked" 
+                         actionListener="#{LandingPageCBean.ctrl.navigateViewColumnClicked()}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();" />
+
+        <p:remoteCommand name="lnd_navigate_rc_RevokeEditBtn" id="lnd_navigate_rc_RevokeEditBtn" 
+                         actionListener="#{LandingPageCBean.ctrl.revokerequestClicked()}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();" />
+
+        <p:remoteCommand name="lnd_navigate_rc_revokeEditClicked" id="lnd_navigate_rc_revokeEditClicked" 
+                         actionListener="#{LandingPageCBean.ctrl.revokeClicked}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();" />
+
+        <p:remoteCommand name="lnd_navigate_rc" id="lnd_navigate_rc" actionListener="#{LandingPageCBean.ctrl.navigateToModule()}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();" />
+
+        <p:remoteCommand name="lnd_navigate_rcform" id="lnd_navigate_rcform"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();" />
+        <p:remoteCommand name="remoteadrbtn" id="remoteadrbtn" 
+                         actionListener="#{LandingPageCBean.ctrl.addrValidation}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();" />
+        <p:remoteCommand name="guidancefunction" id="guidancefunction"
+                         actionListener="#{LandingPageCBean.ctrl.guidanceRedirect()}"
+                         onstart="PF('landingPageForm_progress').block();"
+                         oncomplete="PF('landingPageForm_progress').unblock();" />
+        <p:remoteCommand name="remotedeletereqbtn" id="remotedeletereqbtn" 
+                         actionListener="#{LandingPageCBean.ctrl.delreqValidation}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();" />
+        <p:remoteCommand name="remoterecall" id="remoterecall" 
+                         actionListener="#{LandingPageCBean.ctrl.recall_remotecall}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();" />
+
+        <!--                                            <p:remoteCommand name="lnd_columntoggle_rc" id="lnd_columntoggle_rc" update="datagrid,columntoggle" 
+                                                                     oncomplete="PF('dlg1').hide();"/>-->
+        <p:remoteCommand name="lnd_columntoggle_rc" id="lnd_columntoggle_rc" update="#{LandingPageCBean.model.dataModel.mdlId}_LND_datagrid"
+                         oncomplete="PF('dlg1').hide();"/>
+        <p:remoteCommand name="lnd_navigate_rc_tabviewClicked" id="lnd_navigate_rc_tab" 
+                         actionListener="#{LandingPageCBean.ctrl.newtabviewClicked()}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();" />
+
+        <p:remoteCommand name="lnd_navigate_rc_tabviewClicked_oth" id="lnd_navigate_rc_tab_oth" 
+                         actionListener="#{LandingPageCBean.ctrl.newtabviewClicked_other()}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();" />
+        <p:remoteCommand name="lnd_navigate_rc_nbpnmRevoke" id="lnd_navigate_rc_nbpnmRevoke" 
+                         actionListener="#{LandingPageCBean.ctrl.userlistGetter()}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();"/>
+            <p:remoteCommand name="lnd_navigate_rc_nbpnmRecall" id="lnd_navigate_rc_nbpnmRecall" 
+                         actionListener="#{LandingPageCBean.ctrl.callNonBPMRecall()}"
+                         onstart="PF('landingPageForm_progress').block();"  
+                         oncomplete="PF('landingPageForm_progress').unblock();">
+        </p:remoteCommand>
+        <p:dialog widgetVar="nonbpm" id="nonbpmrevokewidgetvar" style="width:50%;" header="#{LandingPageCBean.model.dataModel.nbpmheader}">
+            <lrp:dataTable 
+                editable="true" 
+                id="nonbpmrevoketo"
+                value="#{LandingPageCBean.model.dataModel.nonbpmValuelist}"
+                columnModel="#{LandingPageCBean.model.dataModel.nonbpmcolumnlist}"
+                style="height:calc(100vh - 230px);margin-top: 8px;">
+            </lrp:dataTable>
+            <p:remoteCommand name="lnd_navigate_rc_getRowData" id="lnd_navigate_rc_getRowData" 
+                             actionListener="#{LandingPageCBean.ctrl.userSetter()}"
+                             onstart="PF('landingPageForm_progress').block();"  
+                             oncomplete="PF('landingPageForm_progress').unblock();">
+            </p:remoteCommand>
+        </p:dialog>
+
+
+
+
+
+
+        <p:dialog id="submitclicked"  minHeight="40">
+
+
+            <p:commandButton value="Ok" actionListener="#{LandingPageCBean.ctrl.submitClicked}"  
+                             />                       
+        </p:dialog>
+        <p:dialog id="vsldlg"  header="#{LandingPageCBean.ctrl.mdlvo.landingpagetitle}" width="400" widgetVar="vsldlg" minHeight="40">
+            <p:outputLabel>Kindly select the vessel to proceed</p:outputLabel>
+
+            <p:selectOneMenu id="usermappedvsl" value="#{LandingPageCBean.ctrl.selectedvesselcode}"  effect="fade" filter="true" filterMatchMode="contains" >                                                              
+                <f:selectItem itemLabel="" itemValue=""/>
+                <f:selectItems value="#{LandingPageCBean.ctrl.vesselList}" var="vslobj" itemValue="#{vslobj.vesselcode}" itemLabel="#{vslobj.vesselname}"/>
+                <p:ajax event="change" update="@this" />
+            </p:selectOneMenu>
+            <p:commandButton value="Ok" actionListener="#{LandingPageCBean.ctrl.vsldlgsubmitClicked}"  
+                             onstart="PF('landingPageForm_progress').block();" oncomplete="PF('landingPageForm_progress').unblock();" />                       
+        </p:dialog>
+
+        <p:dialog id="pendingrefdlg"  header="Reference No. Details" widgetVar="pendingrefdlg" minHeight="40">
+
+
+            <div class="row form-group">   
+                <div class="col-xs-12 col-sm-12">          
+                    <p:dataTable id="reftbl" var="reftbl"
+                                 value="#{LandingPageCBean.ctrl.refnoList}" scrollable="true" scrollHeight="400"
+                                 rowIndexVar="rowIndex"         
+                                 rowKey="#{reftbl}">        
+
+                        <p:column headerText="Reference No."  colspan="2" filterBy="#{reftbl.refno}" style="text-align: center;" filterMatchMode="contains">
+                            <h:outputText value="#{reftbl}"/>
+                        </p:column>
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandLink actionListener="#{LandingPageCBean.ctrl.pendingTaskViewClicked}"
+                                           onstart="PF('landingPageForm_progress').block();"  
+                                           oncomplete="PF('landingPageForm_progress').unblock();" >
+                                <button class="btn btn-info btn-sm">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                                <f:attribute name="selectedRow" value="#{reftbl}"></f:attribute>
+                            </p:commandLink>
+
+                            <p:commandButton update="@this" oncomplete="PF('landingPageForm_progress').unblock();" icon="pi pi-search" title="View">
+                                <f:setPropertyActionListener value="#{reftbl}" target="#{dtSelectionView.selectedCar}" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </div></div>
+
+        </p:dialog>         
+
+        <p:dialog id="revokewarningdlg" header="#{LandingPageCBean.ctrl.mdlvo.landingpagetitle}"  widgetVar="revokewarningdlg"   minHeight="40" width="316">
+            <div class="col-xs-12 col-sm-12">
+                <p:outputLabel>This reference's task has been claimed by</p:outputLabel>   </div>
+            <div class="col-xs-12 col-sm-12" style="margin-top:10px;">
+                <div class="col-xs-12 col-sm-4" align="right">
+                    <p:outputLabel>Name: </p:outputLabel>
+                </div>
+                <div class="col-xs-12 col-sm-8">
+                    <p:outputLabel>#{LandingPageCBean.ctrl.claimedusername}</p:outputLabel>
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-sm-12">
+                <div class="col-xs-12 col-sm-4" align="right" style="margin-left: -23px;">
+                    <p:outputLabel>Department:</p:outputLabel>
+                </div>
+                <div class="col-xs-12 col-sm-8">
+                    <p:outputLabel style="margin-left: 22px;">#{LandingPageCBean.ctrl.claimeduserdepname}</p:outputLabel>
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-sm-12">
+                <div class="col-xs-12 col-sm-4" align="right">
+                    <p:outputLabel>Rank: </p:outputLabel>
+                </div>
+                <div class="col-xs-12 col-sm-8">
+                    <p:outputLabel> #{LandingPageCBean.ctrl.claimeduserrankname}</p:outputLabel>
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-sm-12">
+                <div class="col-xs-12 col-sm-4" align="right">
+                    <p:outputLabel>Group: </p:outputLabel>
+                </div>
+                <div class="col-xs-12 col-sm-8">
+                    <p:outputLabel>#{LandingPageCBean.ctrl.claimedusergroupname}</p:outputLabel>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12" align="right" style="margin-top:10px;">
+                <p:commandButton value="Ok"  actionListener="#{LandingPageCBean.ctrl.closewarningdlg}" 
+                                 onstart="PF('landingPageForm_progress').block();" oncomplete="PF('landingPageForm_progress').unblock();" />    
+            </div>
+
+
+        </p:dialog>
+
+        <p:dialog id="dlgAdditionalReviewer" header="#{LandingPageCBean.ctrl.mdlvo.landingpagetitle}"  widgetVar="adrdlg"   minHeight="20" width="500">
+            <div class="col-xs-12 col-sm-12">
+                <p:outputLabel>Below Additional Reviewers are yet to review:</p:outputLabel>   </div>
+
+            <div class="row form-group">   
+                <div class="col-xs-12 col-sm-12">          
+                    <p:dataTable id="adrtbl" var="adrtableobj"
+                                 value="#{LandingPageCBean.ctrl.adrList}" scrollable="true" scrollHeight="200"
+                                 rowIndexVar="rowIndex"         
+                                 rowKey="#{adrtableobj}">        
+
+                        <p:column headerText="Name"  colspan="2"  style="text-align: center;" >
+                            <h:outputText value="#{adrtableobj.empname} #{adrtableobj.surname}"/>
+                        </p:column>
+                        <p:column headerText="Target Date &amp; Time"  colspan="2"  style="text-align: center;" >
+                            <h:outputText value="#{adrtableobj.revtargetdate}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div></div>
+            <div class="col-xs-12 col-sm-12" align="right" style="margin-top:10px;">
+                <p:commandButton value="Ok"  actionListener="#{LandingPageCBean.ctrl.closeadrdlg}" 
+                                 onstart="PF('landingPageForm_progress').block();" oncomplete="PF('landingPageForm_progress').unblock();" />    
+            </div>
+
+
+        </p:dialog>
+
+        <p:dialog id="dlgdeleterequest" header="#{LandingPageCBean.ctrl.mdlvo.landingpagetitle}"  widgetVar="deletreqdlg"   minHeight="20" width="500">
+            <div class="col-xs-12 col-sm-12">
+                <p:outputLabel>Below user has requested to delete this referenced form :</p:outputLabel>   </div>
+
+            <div class="row form-group">   
+                <div class="col-xs-12 col-sm-12">          
+                    <p:dataTable id="deleterequesttbl" var="deleterequestobj"
+                                 value="#{LandingPageCBean.ctrl.delreqdetailList}" 
+                                 rowIndexVar="rowIndex"         
+                                 rowKey="#{deleterequestobj}">        
+
+                        <p:column headerText="Requested User Name"   style="text-align: center;" >
+                            <h:outputText value="#{deleterequestobj.empname} #{deleterequestobj.surname}"/>
+                        </p:column>
+                        <p:column headerText="Department"    style="text-align: center;" >
+                            <h:outputText value="#{deleterequestobj.depname}"/>
+                        </p:column>
+                        <p:column headerText="Rank"   style="text-align: center;" >
+                            <h:outputText value="#{deleterequestobj.rankname}"/>
+                        </p:column>
+                        <p:column headerText="Requested Date"    style="text-align: center;" >
+                            <h:outputText value="#{deleterequestobj.reqdate}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div></div>
+            <div class="col-xs-12 col-sm-12" align="right" style="margin-top:10px;">
+                <p:commandButton value="Ok"  actionListener="#{LandingPageCBean.ctrl.closedelreqdlg}" 
+                                 onstart="PF('landingPageForm_progress').block();" oncomplete="PF('landingPageForm_progress').unblock();" />    
+            </div>
+
+
+        </p:dialog>
+
+        <div class="form_table_wrapper tiles-body">
+            <div class="form_wrapper form_top_spacing">
+                <h:panelGroup id ="lndsidebar" rendered="#{LandingPageCBean.model.stateModel.enablestatusbar}">
+                    <div class=""> 
+                        <div class="dyn_menu_tab">
+                            <a href="#" onclick="expAggrid_height()" class="toolbar_btn show_toolbarGrid" data-toggle="collapse" data-target="#dyn_menu_hide">
+                                <i class="fa fa-chevron-down arrw_Pnt"></i>
+                            </a>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12">
+                            <div class="dyn_menu_hide collapse" id="dyn_menu_hide">
+                                <div class="col-xs-12 col-sm-12" style="padding:0px; ">
+                                    <div class="col-xs-12 col-sm-3" style="padding:0px;margin-top:5px;width:14.1%;" title="#{LandingPageCBean.ctrl.myactiontooltip}">
+                                        <p:commandLink class="col-xs-12 col-sm-12  dlp-card-center cirlc_Alink" id="myactionfilterSymbl"  
+                                                       style="padding:0px;"   oncomplete="Widgetfilter('myactionfilterSymbl','btnEditRenderInHm','Yes','#{LandingPageCBean.model.dataModel.mdlId}_LND_datagrid')" >
+                                            <!--div class="filterSymblPrnt col-xs-12 col-sm-12" status="false" style="padding:0px;display:flex;">
+                                                    <div class="dlp-half-width ">
+                                                            <div class="dlp-amount">
+                                                                    <h5 class="dlp-count" id="bkg-status-Confirm">#{LandingPageCBean.ctrl.btnEditRenderInHmcount}</h5>
+                                                            </div>
+                                                            <div class="dlp-text">  
+                                                                    <h5 class="dlp-title">My Actions</h5></div>
+                                                    </div>
+                                                    <div class="dlp-half-width-icon dlp-icon dlp-icon-img1">
+                                                            <p:graphicImage styleClass="login_mackline_logo filtrImg" library="mackimages" name="actionLnp.svg" />
+                                                    </div>
+                                                    <div class="dlp-half-width-icon dlp-status-filter-indicator  dlp-icon fa fa-filter dlp-filter-applied"></div>
+                                            </div-->	
+                                            <div class="col-xs-12 col-sm-12 status_widgt_header filterSymblPrnt" status="false" style="padding:0px;">
+                                                <div class="col-xs-12 col-sm-12" style="padding:0px;" align="center">
+                                                    <div class="dlp-half-width-icon dlp-status-filter-indicator  dlp-icon fa fa-filter dlp-filter-applied"></div>
+
+                                                </div>
+                                                <div class="col-xs-5" style="padding:0px;">
+                                                    <div class="circle_count_val">
+                                                        <h5 class="circle_count_number " id="bkg-status-Confirm">#{LandingPageCBean.ctrl.btnEditRenderInHmcount}</h5>                                                                          
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-7" style="padding:0px;">
+                                                    <h5 class="circle_count_text">My Actions</h5>
+                                                </div>
+
+                                            </div>
+                                        </p:commandLink>
+                                    </div>	
+                                    <ui:repeat value="#{LandingPageCBean.model.dataModel.widgetVolist}" id="repeatVOlst" var="wvo" varStatus="rowindex">
+                                        <div class="col-xs-12 col-sm-3" style="padding:0px;margin-top:5px;width:14.1%" title="#{wvo.tooltip}">
+                                            <p:commandLink class="col-xs-12 col-sm-12  dlp-card-center cirlc_Alink #{wvo.title}" id="filterSymbl"  
+                                                           style="padding:0px;"   oncomplete="Widgetfilter('repeatVOlst-#{rowindex.index}-filterSymbl','#{wvo.wColumnname}','#{wvo.wvalue}','#{LandingPageCBean.model.dataModel.mdlId}_LND_datagrid')" >
+                                                <!--div class="filterSymblPrnt col-xs-12 col-sm-12" status="false" style="padding:0px;display:flex;">
+                                                        <div class="dlp-half-width ">
+                                                                <div class="dlp-amount">
+                                                                        <h5 class="dlp-count" id="bkg-status-Confirm">#{wvo.count}</h5>
+                                                                </div>
+                                                                <div class="dlp-text">
+                                                                        <h5 class="dlp-title">#{wvo.title}</h5></div>
+                                                        </div>
+                                                        <div class="dlp-half-width-icon dlp-icon dlp-icon-img1">
+                                                                <p:graphicImage styleClass="login_mackline_logo filtrImg" library="mackimages" name="submitLnd.svg" />
+                                                        </div>
+                                                        <div class="dlp-half-width-icon dlp-status-filter-indicator  dlp-icon fa fa-filter dlp-filter-applied"></div>
+                                                </div-->	
+                                                <div class="col-xs-12 col-sm-12 status_widgt_header filterSymblPrnt" status="false" style="padding:0px;">
+                                                    <div class="col-xs-12 col-sm-12" style="padding:0px;" align="center">
+                                                        <div class="dlp-half-width-icon dlp-status-filter-indicator  dlp-icon fa fa-filter dlp-filter-applied"></div>
+
+                                                    </div>
+                                                    <div class="col-xs-5 parent-with-child" style="padding:0px;">
+                                                        <div class="circle_count_val #{wvo.title}">
+                                                            <h5 class="circle_count_number #{wvo.title}" id="bkg-status-Confirm">#{wvo.count}</h5>                                                                          
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-7" style="padding:0px;">
+                                                        <h5 class="circle_count_text #{wvo.title}">#{wvo.title}</h5>
+                                                    </div>
+
+                                                </div>
+                                                <f:attribute name="index" value="#{rowindex.index}"></f:attribute>
+                                                <f:attribute name="vo" value="#{wvo}"></f:attribute>
+                                            </p:commandLink>															
+                                        </div>
+                                    </ui:repeat>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+                <p:panel styleClass="inputRangePadd" style="background-color: #fff !important;" rendered="#{LandingPageCBean.model.stateModel.datewisesearch}">
+                    <div class="col-xs-12 col-sm-12" style="padding-left:0px;margin-top: 5px;">
+
+                        <div class="col-xs-12 col-sm-4" style="padding:0px;width: 250px;">
+                            <h:inputHidden id="hiddenval" value="#{LandingPageCBean.model.dataModel.filterdate}" />
+                            <div id="reportrange"  style="background: #FFF;  cursor: pointer; padding: 5px 10px; border: 1px solid #CCC; width: 100%">
+                                <i class="fa fa-calendar"></i>&nbsp;
+                                <span></span> <i class="fa fa-caret-down"></i>
+                                <a title="Click for guidance" onclick="guidancefunction();" style="margin-left: 6px;" >
+                                    <i class="fa fa-question-circle"></i></a>
+                            </div>
+
+
+                        </div>
+                        <div class="col-xs-12 col-sm-1" style="padding:0px">
+                            <p:commandLink class="btn_wrapper" actionListener="#{LandingPageCBean.ctrl.Show}" rendered="true"
+
+                                           onstart="PF('landingPageForm_progress').block();"
+                                           oncomplete="PF('landingPageForm_progress').unblock();"
+                                           process="@this,hiddenval"
+                                           >
+                                <span>Show</span>
+                                <p:graphicImage library="mackimages" name="btn_icons/new.svg"/>
+                            </p:commandLink>	
+                        </div>
+
+                        <h:panelGroup layout="block"   id="pnlincludeopenitems" rendered ="#{LandingPageCBean.model.stateModel.enableIncludeOpenItems}">
+                            <div class="col-xs-12 col-sm-3"  style="width: 180px; padding: 0; margin-left: 15px;">
+                                <!-- <div class="empty_label_space"></div> -->
+
+                                <label style="position: relative;top: -8px;" class="labe_align" id="inclopen"><h:outputText id="tooltip_inclopenitems" rendered= "true" value="Include Open Items" /></label>     
+                                <p:tooltip id="tooltip_inclopenitems1" for="tooltip_inclopenitems" value="All open records in module will be displayed, irrespective of date range selected. Depending on data volume this may take a while to load" position="top"/>
+                                <label class="switch">
+                                    <h:selectBooleanCheckbox id="includeopenitems" value="#{LandingPageCBean.model.dataModel.includeOpenItems}" disabled="false" >
+                                        <p:ajax update="includeopenitems" process="@this,hiddenval" 
+                                                listener="#{LandingPageCBean.ctrl.checkincludeopenitems}"  onstart="PF('landingPageForm_progress').block();"  
+                                                oncomplete="PF('landingPageForm_progress').unblock();" />
+                                    </h:selectBooleanCheckbox>
+                                    <span class="slider round"></span>
+                                </label>   
+
+                            </div>  </h:panelGroup>
+
+                        <h:panelGroup layout="block"   id="pnlenableunhandledtable" rendered ="#{LandingPageCBean.model.stateModel.enableunhandledswitch}">
+                            <div class="col-xs-12 col-sm-3"  style="width: 230px;padding-left: 0">
+                                <!-- <div class="empty_label_space"></div> -->
+
+                                <label style="position: relative;top: -8px;" class="labe_align" id="inclopenunhan"><h:outputText id="tooltip_openunhandledtable" rendered= "true" value="To show other records" /></label>     
+                                <p:tooltip id="tooltip_unhandledtable1" for="tooltip_openunhandledtable" value="To show unhandled records for the selected date period" position="top"/>
+                                <label class="switch">
+                                    <h:selectBooleanCheckbox id="openunhandledtable" value="#{LandingPageCBean.model.dataModel.openunhandledtable}" disabled="false" >
+                                        <p:ajax update="openunhandledtable" process="@this,hiddenval" 
+                                                listener="#{LandingPageCBean.ctrl.enableunhanledtable}"  onstart="PF('landingPageForm_progress').block();"  
+                                                oncomplete="PF('landingPageForm_progress').unblock();" />
+                                    </h:selectBooleanCheckbox>
+                                    <span class="slider round"></span>
+                                </label>   
+
+                            </div>  </h:panelGroup>
+
+                        <p:panel rendered="true">
+                            <div class="col-xs-12 col-sm-3" style="padding-right:0px;width: 14%;">
+                                <h:panelGroup rendered="#{LandingPageCBean.model.stateModel.defaultsearch}">
+                                    <label id="defltSearch" ><h:outputText rendered= "true" value="Default Search" /></label> 
+                                    <svm:TwoColSearch id="tasksearch" style="margin-left:10px;"
+                                                      actionEventListener="#{LandingPageCBean.ctrl.btnrefSearchActionPerformed}" 
+                                                      update="@this" />
+
+                                </h:panelGroup>
+                            </div>
+                        </p:panel>
+                        <div class="col-xs-12 col-sm-1 pull-right" style="padding-right:0px">
+                            <p:commandLink class="btn_wrapper" style="width: 100%; " actionListener="#{LandingPageCBean.ctrl.newClicked}" rendered="#{LandingPageCBean.model.dataModel.sm_newBtnRender}"
+
+                                           onstart="PF('landingPageForm_progress').block();"
+                                           oncomplete="PF('landingPageForm_progress').unblock();"
+                                           process="@this"
+                                           >
+                                <span>New</span>
+                                <p:graphicImage library="mackimages" name="btn_icons/new.svg"/>
+                            </p:commandLink>	
+
+                        </div>
+                    </div>
+                </p:panel>
+
+
+                <h:panelGroup  rendered="#{!LandingPageCBean.model.stateModel.datewisesearch}">
+                    <div class="col-xs-12 col-sm-12 grid_test_top" style="padding-right:0px;">
+                        <div class="col-xs-12 col-sm-9" style="padding-right:0px">
+                            <label></label>
+                        </div>
+
+                        <h:panelGroup rendered="#{!LandingPageCBean.model.stateModel.enablestatusbar}"> 
+                            <h:panelGroup rendered="#{LandingPageCBean.ctrl.disMyactions}"> 
+
+                                <div class="col-xs-12 col-sm-2" style="padding-left:0px;float:right">
+                                    <p:commandLink class="col-xs-12 col-sm-12  dlp-card-center cirlc_Alink" id="myactionfilterSymbl1"  
+                                                   style="padding:0px;height: 47px;margin: 0px;margin-top: 5px;float:right;width: 87%;"   oncomplete="Widgetfilter('myactionfilterSymbl1','btnEditRenderInHm','Yes','#{LandingPageCBean.model.dataModel.mdlId}_LND_datagrid')" >
+                                        <!--div class="filterSymblPrnt col-xs-12 col-sm-12" status="false" style="padding:0px;display:flex;">
+                                                <div class="dlp-half-width " style="margin-top: 6px;">
+                                                        <div class="dlp-amount dlp-right-crnr">
+                                                                <h5 class="dlp-count-crnr" id="bkg-status-Confirm"># {LandingPageCBean.ctrl.btnEditRenderInHmcount}</h5>
+                                                        </div>
+                                                        <div class="dlp-text dlp-right-crnr">  
+                                                                <h5 class="dlp-title-crnr">My Actions</h5></div>
+                                                </div>
+                                                <div class="dlp-half-width-icon dlp-icon-crnr dlp-icon-img1">
+                                                        <p:graphicImage styleClass="login_mackline_logo filtrImgCrnr" library="mackimages" name="reviewDashboard.svg" />
+                                                </div>
+                                                <div class="dlp-half-width-icon dlp-status-filter-indicator-crnr  dlp-icon fa fa-filter dlp-filter-applied"></div>
+                                        </div-->	
+                                        <div class="col-xs-12 col-sm-12 status_widgt_header filterSymblPrnt" status="false" style="padding:0px;">
+                                            <div class="col-xs-12 col-sm-12" style="padding:0px;" align="center">
+                                                <div class="dlp-half-width-icon dlp-status-filter-indicator  dlp-icon fa fa-filter dlp-filter-applied"></div>
+
+                                            </div>
+                                            <div class="col-xs-5" style="padding:0px;">
+                                                <div class="circle_count_val">
+                                                    <h5 class="circle_count_number " id="bkg-status-Confirm">#{LandingPageCBean.ctrl.btnEditRenderInHmcount}</h5>                                                                          
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-7" style="padding:0px;">
+                                                <h5 class="circle_count_text" >My Actions</h5>
+                                            </div>
+
+                                        </div>
+
+                                    </p:commandLink>
+                                </div>
+                            </h:panelGroup>  </h:panelGroup>
+                        <div class="col-xs-12 col-sm-1" style="padding-left:0px;float:right;">
+                            <p:commandLink class="btn_wrapper" style="width: 100%; margin:0px;margin-top: 10px;" actionListener="#{LandingPageCBean.ctrl.newClicked}" rendered="#{LandingPageCBean.model.dataModel.sm_newBtnRender}"
+
+                                           onstart="PF('landingPageForm_progress').block();"
+                                           oncomplete="PF('landingPageForm_progress').unblock();"
+                                           process="@this"
+                                           >
+                                <span>New</span>
+                                <p:graphicImage library="mackimages" name="btn_icons/new.svg"/>
+                            </p:commandLink>	
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+
+                <!-- <h:panelGroup id="LND_dataTableNewPanel" rendered="# {LandingPageCBean.ctrl.rendermaintable}" > -->
+
+                <h:panelGroup id="LND_dataTableNewPanel" styleClass="#{LandingPageCBean.ctrl.dynamicstyle}" rendered="true" >
+                    <div class="form-group">
+                        <div class="col-xs-12 col-sm-12 dynamiclandingpageagclass_hder" style="height: 50vh; margin-bottom:20px;">
+                            <!-- <h:panelGroup id="LND_dataTableNewPanel" rendered="# {LandingPageCBean.ctrl.rendermaintable}" > -->
+
+                            <lrp:dataTable  id="#{LandingPageCBean.model.dataModel.gridid}" 
+                                            rendered="true"      value="#{LandingPageCBean.model.dataModel.dynamicEntityMap}"  
+                                            columnModel="#{LandingPageCBean.ctrl.columnModelList}" 
+                                            style="height:100%;margin-top: 8px;"
+                                            selectionMode="single" 
+                                            selection="#{LandingPageCBean.model.dataModel.selectedRowMap}"
+                                            disabledSelection="#{LandingPageCBean.model.stateModel.doubleclickdisbled}" 
+                                            class="dynamiclandingpageagclass"
+                                            renderingMode="transaction" 
+                                            editable="true" floatingFilter="true" >
+
+                                <p:ajax id="datatableajax" process="landingPageForm"
+                                        event="rowDblselect" listener="#{LandingPageCBean.ctrl.doubleClicked}"
+                                        onstart="PF('landingPageForm_progress').block();"  
+                                        oncomplete="PF('landingPageForm_progress').unblock();"/>
+
+                            </lrp:dataTable>
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+
+
+                <!-- <h:panelGroup id="LND_dataTableNewPanel2" rendered="# {LandingPageCBean.ctrl.renderunhandledtable}" > -->
+                <p:panel id="LND_dataTableNewPanel2">
+                    <h:panelGroup id="LND_dataTableNewPanelUnhandled" styleClass="#{LandingPageCBean.ctrl.dynamicstyle}" rendered="#{LandingPageCBean.ctrl.renderunhandledtable}">
+                        <div class="form-group">	
+                            <div class="col-xs-12 col-sm-12 dynamiclandingpageagclass_hder" style="height: 50vh; margin-bottom:20px;">
+                                <!-- <h:panelGroup id="LND_dataTableNewPanel2" rendered="# {LandingPageCBean.ctrl.renderunhandledtable}"> -->
+                                <lrp:dataTable  id="#{LandingPageCBean.model.dataModel.secondgridid}" 
+                                                rendered="true"      value="#{LandingPageCBean.model.dataModel.unhandleddynamicEntityMap}"  
+                                                columnModel="#{LandingPageCBean.ctrl.columnModelListunhandled}" 
+                                                style="height:100%;margin-top: 8px;"
+                                                selectionMode="single" 
+                                                selection="#{LandingPageCBean.model.dataModel.selectedRowMap}"
+                                                disabledSelection="#{LandingPageCBean.model.stateModel.doubleclickdisbled}" 
+                                                class="dynamiclandingpageagclass"
+                                                renderingMode="transaction" 
+                                                editable="true" floatingFilter="true"  >
+
+                                    <p:ajax id="datatableajax1" process="landingPageForm"
+                                            event="rowDblselect" listener="#{LandingPageCBean.ctrl.openNewtab}"
+                                            onstart="PF('landingPageForm_progress').block();"  
+                                            oncomplete="PF('landingPageForm_progress').unblock();"/>
+
+                                </lrp:dataTable>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+
+                </p:panel>
+
+
+                <!--                                            <svm:importExcelNew class="pull-left" rendered="# {LandingPageCBean.model.dataModel.userImportExcelDis}"
+                                                                                                                                                moduleId="USD" importExcelId="USD1" beanName="LandingPageCBean" />-->
+
+                <svm:importExcelNew class="pull-left"    rendered="#{LandingPageCBean.model.dataModel.vesselImportExcelDis}"
+                                    moduleId="SPS" importExcelId="SPS2" beanName="LandingPageCBean" />
+
+
+            </div>
+        </div>
+
+
+
+
+        <script type="text/javascript">
+
+
+            $(document).ready(function () {
+                console.log(#{LandingPageCBean.ctrl.defaultrange});
+                var start = moment().subtract(#{LandingPageCBean.ctrl.defaultrange}, 'days');
+                //   var start = moment().subtract(29, 'days');
+                var end = moment();
+
+                function cb(start, end) {
+                    try {
+                        console.log(start.format('D-MMMM-YYYY') + ' - ' + end.format('D-MMMM-YYYY'));
+                        document.getElementById("hiddenval").value = start.format('YYYY-MM-DD') + ' ~~~ ' + end.format('YYYY-MM-DD');
+                        $('#reportrange span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+                        //  $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                    } catch (err) {
+
+                    }
+                }
+
+                $('#reportrange').daterangepicker({
+                    startDate: start,
+                    endDate: end,
+                    minYear: 1901,
+                    autoApply: false,
+                    drops: "down",
+                    opens: "right",
+                    locale: {
+                        "format": "DD/MM/YYYY"
+                    },
+                    timePicker: false,
+                    showDropdowns: true,
+                    ranges: {
+                        'Last 6 years': [moment().subtract(5, 'year').startOf('year'), moment()],
+                        'Last 3 years': [moment().subtract(2, 'year').startOf('year'), moment()],
+                        'Last year': [moment().subtract(1, 'year').startOf('year'), moment()],
+                        'Last 365 days': [moment().subtract(364, 'days'), moment()],
+                        'Last 6 Months': [moment().startOf('month').subtract(6, 'month'), moment()],
+                        'Last 3 Months': [moment().startOf('month').subtract(3, 'month'), moment()],
+                        'Last 2 Months': [moment().startOf('month').subtract(2, 'month'), moment()],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment()],
+                        'This Month': [moment().startOf('month'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Today': [moment(), moment()]
+                    },
+                    disabled: true
+                }, cb);
+
+                cb(start, end);
+            });
+
+
+            function changeFormat(pattern) {
+                $('#reportrange span').html(start.format(pattern) + ' - ' + end.format(pattern));
+
+            }
+            function disableDatepicker() {
+                $("#reportrange").daterangepicker("option", "disabled", true);
+
+            }
+        </script>
+
+        <script>
+
+            function Widgetfilter(id, columnname, columnvalue, datgridID) {
+                console.log("Test");
+                console.log("columnname===" + columnname);
+                console.log("columnvalue===" + columnvalue);
+                try {
+                    var filterid = id;
+                    console.log("filterid===" + filterid);
+                    var checkSts = $("#" + filterid + " " + ".filterSymblPrnt").attr("status");
+                    console.log(checkSts);
+                    if (checkSts === "false") {
+                        clearfilters(datgridID);
+                        $("#" + filterid + " " + ".filterSymblPrnt").attr("status", "true");
+                        var FilterComponent = getSmDtGrid(datgridID)
+                        FilterComponent.api.setFilterModel(null);
+                        FilterComponent = getSmDtGrid(datgridID).api.getFilterInstance(columnname);
+                        FilterComponent.setModel({
+                            type: 'equals',
+                            filter: columnvalue
+                        });
+                        FilterComponent.textFilterParams.api.onFilterChanged();
+                    } else
+                    {
+                        clearfilters(datgridID);
+                        //$('.dlp-wrapper a').attr('filtered', 'false');
+                        //$($("[status=\"" + value + "\"]")[0]).attr('filtered', 'false');
+                        var FilterComponent = getSmDtGrid(datgridID)
+                        FilterComponent.api.setFilterModel(null);
+                    }
+                    //   svmdt.resetAg(datgridID);
+                } catch (err) {
+
+                }
+            }
+
+            function openfilter(id) {
+                try {
+
+                    setTimeout(function () {
+                        svmdt.setConditionFilter(id);
+                        PF('landingPageForm_progress').unblock();
+                    }, 200);
+                } catch (err) {
+                    console.log("open filter called===err====>>>>");
+
+                }
+            }
+
+            function clearfilters(datgridID) {
+                try {
+                    svmdt.setConditionFilter(datgridID);
+                    $(".filterSymblPrnt").attr("status", "false");
+                    // $("#" + "repeatVOlst-" + 1 + "-filterSymbl" + " " + ".filterSymblPrnt").attr("status", "false");
+                    // $("#" + "repeatVOlst-" + 2 + "-filterSymbl" + " " + ".filterSymblPrnt").attr("status", "false");
+                    // $("#" + "repeatVOlst-" + 3 + "-filterSymbl" + " " + ".filterSymblPrnt").attr("status", "false");
+                    // $("#" + "repeatVOlst-" + 4 + "-filterSymbl" + " " + ".filterSymblPrnt").attr("status", "false");
+
+                    // $("#" + "myactionfilterSymbl1" + " " + ".filterSymblPrnt").attr("status", "false");
+                    //$("#" + "myactionfilterSymbl" + " " + ".filterSymblPrnt").attr("status", "false");
+
+                } catch (err) {
+
+
+                }
+            }
+        </script>
+    </h:form>
+
+</ui:composition>
+
+
+
+
+
+
+
+
+

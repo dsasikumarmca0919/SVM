@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.svm.lrp.nfr</groupId>
+    <artifactId>lndcbean</artifactId>
+    <version>1.0.9</version>
+    <packaging>jar</packaging>
+
+    <name>lndcbean-latest</name>
+
+
+    <properties>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+         <commonlibpath>D:\All Supporting Jars</commonlibpath>
+        <Env_Des>\standalone\deployments\MAC.war\WEB-INF\lib,\standalone\deployments\DMS.war\WEB-INF\lib</Env_Des>
+    </properties>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org//maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    
+    
+    
+    <dependencies>         
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>compmodel</groupId>
+            <artifactId>compmodel</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\compmodel.jar</systemPath>            
+        </dependency>
+        <dependency>
+            <groupId>svm.nfr</groupId>
+            <artifactId>expcbean</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\exceptionlogUtil.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>cusmastermdl</groupId>
+            <artifactId>cusmastermdl</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\cusmastermdl.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>enc</groupId>
+            <artifactId>enc</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\enc.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>mbutil</groupId>
+            <artifactId>mbutil</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\mbutil.jar</systemPath>
+        </dependency>
+        <dependency>
+             <groupId>svm.nfr</groupId>
+             <artifactId>mdmcacheutil</artifactId>
+             <version>1.0</version>
+             <type>jar</type>
+             <scope>system</scope>
+             <systemPath>${commonlibpath}\mdmcacheutil.jar</systemPath>
+        </dependency>
+          <dependency>
+            <groupId>com.svm.cacheservice</groupId>
+            <artifactId>Ex_vesselnameCache</artifactId>
+            <version>1.0</version>
+             <scope>system</scope>
+            <systemPath>${commonlibpath}\Ex_vesselnameCache.jar</systemPath>
+         </dependency>
+        <dependency>
+            <groupId>sps</groupId>
+            <artifactId>sps</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\spscbean.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.svm.json</groupId>
+            <artifactId>wfacbean</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\wfacbean.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.svm.powerEdit</groupId>
+            <artifactId>powerEditHistoryUtil</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\powerEditHistoryUtil.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.svm.json</groupId>
+            <artifactId>JsonUtil</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\JsonUtil.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.svm.json</groupId>
+            <artifactId>wfmcbean</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\wfmcbean.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.svm.msc.wkf.util</groupId>
+            <artifactId>wfacbean</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\wfacbean.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.svm.lrp.nfr.mainejb</groupId>
+            <artifactId>loginejb</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\Loginejb.jar</systemPath>
+        </dependency> 
+        
+        
+        <dependency>
+            <groupId>com.svm</groupId>
+            <artifactId>DynamicBreadCrumb</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\DynamicBreadCrumb.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>svm.nfr</groupId>
+            <artifactId>macutil</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\macutil.jar</systemPath>
+        </dependency>
+        
+        <!--      <dependency>
+            <groupId>com.svm.nfr</groupId>
+            <artifactId>bpmutil</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\bpmutil.jar</systemPath>
+        </dependency>-->
+        
+        <!--        <dependency>
+            <groupId>com.svm.nfr</groupId>
+            <artifactId>bpmutil</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\smbpmutil.jar</systemPath>
+        </dependency>-->
+        <dependency>
+            <groupId>com.svm.nfr</groupId>
+            <artifactId>bpmutil</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\smbpmutil.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.svm.nfr.query.sevice.util</groupId>
+            <artifactId>VDS</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\VDS.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.svm.nfr.query.sevice.util</groupId>
+            <artifactId>FileExportBean</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\FileExportBean.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.svm.nfr.query.sevice.util</groupId>
+            <artifactId>downloadmanager</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\downloadmanager.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>downloadutil</groupId>
+            <artifactId>downloadutil</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\downloadutil.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.svm.lrp.exp</groupId>
+            <artifactId>appmain</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\appmain.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.4</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\gson-2.2.4.jar</systemPath>
+        </dependency>
+    
+        <dependency>
+            <groupId>com.svm.lrp.nfr</groupId>
+            <artifactId>mdlalias</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\ModuleAlias.jar</systemPath>
+        </dependency>
+        
+        <!-- jsfutils jar 
+
+        <dependency>
+            <groupId>com.svm.jsf.utils</groupId>
+            <artifactId>jsfutils</artifactId>
+            <version>1.0</version>
+        </dependency> -->
+
+        <!-- poi jar-->
+
+     
+
+        <!-- jep jars -->
+
+        <!--        <dependency>
+            <groupId>org.lsmp.djep</groupId>
+            <artifactId>djep</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.nfunk.jep</groupId>
+            <artifactId>jep</artifactId>
+            <version>2.3</version>
+        </dependency>-->
+
+        <!-- Primefaces jar -->
+
+        <!--        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>5.2</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\primefaces-5.2.jar</systemPath>
+        </dependency>-->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>6.0</version>
+            <type>jar</type>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\primefaces-6.0.jar</systemPath>
+        </dependency>
+        
+        <!--<dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
+            <version>3.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\omnifaces-3.0.jar</systemPath>
+        </dependency>-->
+
+        <!-- Compress API -->
+        <!--
+        <dependency>
+            <groupId>solverminds.compress</groupId>
+            <artifactId>compressapi</artifactId>
+            <version>1.0</version>
+        </dependency>-->
+
+        <!-- server utils jar -->
+
+        <!--        <dependency>
+            <groupId>lrp.serverutils.refs</groupId>
+            <artifactId>serverutils</artifactId>
+            <version>1.0</version>
+        </dependency>-->
+
+        <!--LRPUtils--> 
+
+        <dependency>
+            <groupId>com.svm.lrp.nfr</groupId>
+            <artifactId>lrputils</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\lrputils.jar</systemPath>
+        </dependency>
+
+        <!--SMdialog--> 
+
+        <!--        <dependency>
+            <groupId>com.svm.lrp.nfr.smdialog</groupId>
+            <artifactId>smdialog</artifactId>
+            <version>1.0</version>
+        </dependency>-->
+
+        <!-- Custom Scope -->
+         <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-embeddedt</artifactId>
+            <version>7.1.1.Final</version>
+            <type>jar</type>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\infinispan-embedded-7.1.1.Final.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.svm.lrp.jsf.context.scope</groupId>
+            <artifactId>customscope</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\customscope.jar</systemPath>
+        </dependency>
+
+        <!--Import excel-->
+        <dependency>
+            <groupId>importutil</groupId>
+            <artifactId>ImportUtils</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\ImportUtils.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.svm.nfr.excel.lib</groupId>
+            <artifactId>importexcel</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\importexcelnew.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+            <groupId>svm.nfr</groupId>
+            <artifactId>MultitenancyUtil</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\multitenancyutil.jar</systemPath>
+        </dependency>
+        <!--        <dependency>
+            <groupId>com.svm.nfr.excel.lib</groupId>
+            <artifactId>importexcel</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+         Smc 
+
+        <dependency>
+            <groupId>resources.svm</groupId>
+            <artifactId>smc</artifactId>
+            <version>1.0</version>
+        </dependency>-->
+
+        <!-- SmcNew + ExportExcel -->
+
+        <dependency>
+            <groupId>com.svm.jsf.component</groupId>
+            <artifactId>smcnew</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\smcnew.jar</systemPath>
+        </dependency>
+        
+        <!--        <dependency>
+            <groupId>com.svm.nfr</groupId>
+            <artifactId>JSFUtils</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\jsfutils.jar</systemPath>
+        </dependency>-->
+        <dependency>
+            <groupId>com.svm.nfr</groupId>
+            <artifactId>JSFUtils</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\JSFUtils.jar</systemPath>
+        </dependency>
+        
+        <!-- Searchcomponents -->
+
+        <dependency>
+            <groupId>com.svm.lrp.nfr.search</groupId>
+            <artifactId>searchcomponents</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\searchcomponents.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.svm.cacheservice</groupId>
+            <artifactId>NotificationCache</artifactId>
+            <version>1.0.1</version>
+            <scope>system</scope>
+            <systemPath>${commonlibpath}\nciCbean.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>lndcbean</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <compilerArguments>
+                        <endorseddirs>${endorsed.dir}</endorseddirs>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+            
+            <!--Added by Mahendiran -->            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-help-plugin</artifactId>
+                <version>2.1.1</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>effective-pom</goal>
+                        </goals>
+                        <configuration>           
+                            <output>${project.build.outputDirectory}/META-INF\resources/${project.version}</output>
+           
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>  
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>                   
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}\META-INF/resources</outputDirectory>
+                            <resources>         
+                                <resource>
+                                    <directory>src/main/webapp</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>             
+                        </configuration> 
+                    </execution>
+                </executions>
+            </plugin>
+            
+            
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${endorsed.dir}</outputDirectory>
+                            <silent>true</silent>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>javax</groupId>
+                                    <artifactId>javaee-endorsed-api</artifactId>
+                                    <version>7.0</version>
+                                    <type>jar</type>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>jrebel-maven-plugin</artifactId>
+                <version>1.1.10</version>
+                <executions>
+                    <execution>
+                        <id>generate-rebel-xml</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>jrebel-maven-plugin</artifactId>
+                <version>1.1.10</version>
+                <executions>
+                    <execution>
+                        <id>generate-rebel-xml</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
